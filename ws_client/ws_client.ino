@@ -1,8 +1,8 @@
 #include <ArduinoWebsockets.h>
 
-const char* ssid = "Apto_502"; // Nome da rede
-const char* password = "nossa123senha."; // Senha da rede
-const char* websockets_server_host = "192.168.0.10"; // IP do servidor websocket
+const char* ssid = "Igor Tim"; // Nome da rede
+const char* password = "matematica12"; // Senha da rede
+const char* websockets_server_host = "192.168.15.16"; // IP do servidor websocket
 const int websockets_server_port = 3000; // Porta de conexão do servidor
 
 // Utilizamos o namespace de websocket para podermos utilizar a classe WebsocketsClient
@@ -68,12 +68,12 @@ void setup()
         Serial.println(message.data());
 
         // Ligamos/Desligamos o led de acordo com o comando
-        if(message.data().indexOf("ArrowUp") != -1){
+        if(message.data().indexOf("ArrowUp") != -1 and message.data().indexOf("ArrowDown") == -1){
             digitalWrite(FORWARD, HIGH);
             digitalWrite(BACK, LOW);
         }
            
-        if(message.data().indexOf("ArrowDown") != -1){
+        if(message.data().indexOf("ArrowDown") != -1 and message.data().indexOf("ArrowUp") == -1){
             digitalWrite(FORWARD, LOW);
             digitalWrite(BACK, HIGH);
         }
@@ -87,11 +87,11 @@ void setup()
             digitalWrite(LEFT, LOW);
             digitalWrite(RIGHT, HIGH);
         }
-        else{
-            digitalWrite(FORWARD, LOW);
+        if(message.data().indexOf("pare") != -1 || message.data().indexOf("ArrowUp,ArrowDown") != -1 || message.data().indexOf("ArrowDown,ArrowUp") != -1 || message.data().indexOf("ArrowLeft,ArrowRight") != -1 || message.data().indexOf("ArrowRight,ArrowLeft") != -1){
             digitalWrite(BACK, LOW);
             digitalWrite(LEFT, LOW);
             digitalWrite(RIGHT, LOW);
+            digitalWrite(FORWARD, LOW);
         }
     });
 }
@@ -101,5 +101,4 @@ void loop()
     //  De tempo em tempo, o websockets client checa por novas mensagens recebidas
     if(client.available()) 
         client.poll();
-    delay(1);
 }

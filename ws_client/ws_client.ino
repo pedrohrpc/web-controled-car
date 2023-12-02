@@ -1,8 +1,8 @@
 #include <ArduinoWebsockets.h>
 
 const char* ssid = "Apto_502"; // Nome da rede
-const char* password = "nossa123casa."; // Senha da rede
-const char* websockets_server_host = "192.168.15.16"; // IP do servidor websocket
+const char* password = "nossa123senha."; // Senha da rede
+const char* websockets_server_host = "192.168.0.10"; // IP do servidor websocket
 const int websockets_server_port = 3000; // Porta de conexão do servidor
 
 // Utilizamos o namespace de websocket para podermos utilizar a classe WebsocketsClient
